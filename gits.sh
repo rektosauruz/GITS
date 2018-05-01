@@ -44,8 +44,8 @@ do
     `echo -e "                           ${YELLOW}<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>${RESET}"`
     `echo -e "                           ${YELLOW}<<<<<${RESET}${RED} MAIN MENU${RESET} ${YELLOW}>>>>>${RESET}"`
     ${GREEN}=========================================================================${RESET}
-    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005]  SHA-256${RESET}   |||   ${GREEN}[009]      N/A${RESET}   
-    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006]      N/A${RESET}   |||   ${GREEN}[010]      N/A${RESET}   
+    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}    |||   ${GREEN}[009]      N/A${RESET}   
+    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}  |||   ${GREEN}[010]      N/A${RESET}   
     ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007]      N/A${RESET}   |||   ${GREEN}[011]      N/A${RESET}   
     ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008]      N/A${RESET}   |||   ${GREEN}[012]      N/A${RESET}   
     ${RED}  (q)uit${RESET}
@@ -152,6 +152,33 @@ iptables-save > /etc/iptables.conf
 }
 
 
+tar_archiever() {
+
+echo  "<PacK>     1"
+echo  "<UnPacK>   2"
+echo  "<QUIT>     Q"
+read user_c
+
+case "$user_c" in
+   "1") echo "name the packed file"
+	      echo "path/filename"
+        read file_p1
+        read file_p2
+        tar -czvf /root/Desktop/"$file_p1".tar.gz --directory $file_p2 .
+    
+   ;;
+   "2") echo "path/filename"
+        read dir1
+        tar -xzvf "$dir"
+   ;;
+   "Q") return 1 #exit 0
+   ;;
+   *) echo "use defined values, ending the program now."
+   ;;  
+esac
+
+}
+
 
     read -n1 -s
     case "$REPLY" in
@@ -165,6 +192,7 @@ iptables-save > /etc/iptables.conf
     "4")  md5 ;;
 #    "5")  sh /root/Desktop/GITS/sha256c.sh ;;
     "5")  sha256 ;;
+    "6")  tar_archiever ;;
     "q")  exit                      ;;
 #    "q")  echo "case sensitive!!"   ;; 
      * )  echo "invalid option"     ;;
