@@ -41,13 +41,13 @@ do
     `echo "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
  
     ${GREEN}=========================================================================${RESET}
-    `echo -e "                           ${YELLOW}<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>${RESET}"`
-    `echo -e "                           ${YELLOW}<<<<<${RESET}${RED} MAIN MENU${RESET} ${YELLOW}>>>>>${RESET}"`
+    `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
+    `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     ${GREEN}=========================================================================${RESET}
-    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}    |||   ${GREEN}[009]      N/A${RESET}   
-    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}  |||   ${GREEN}[010]      N/A${RESET}   
-    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007]      N/A${RESET}   |||   ${GREEN}[011]      N/A${RESET}   
-    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008]      N/A${RESET}   |||   ${GREEN}[012]      N/A${RESET}   
+    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}    |||   ${GREEN}[009]    N/A${RESET}   
+    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}  |||   ${GREEN}[010]    N/A${RESET}   
+    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007]    N/A${RESET}     |||   ${GREEN}[011]    N/A${RESET}   
+    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008]    N/A${RESET}     |||   ${GREEN}[012]    N/A${RESET}   
     ${RED}  (q)uit${RESET}
     ${GREEN}=========================================================================${RESET}
 EOF
@@ -56,6 +56,7 @@ md5() {
 echo "please give the string to be converted to md5 format"
 read u_input
 echo "md5 of $u_input : `echo -n "$u_input" | md5sum`"
+sleep 5
 }
 
 
@@ -63,6 +64,7 @@ sha256() {
 echo "please give the string to be converted to md5 format"
 read u_input
 echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`"
+sleep 5
 }
 
 
