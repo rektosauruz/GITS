@@ -35,7 +35,7 @@ while :
 do
     clear
     cat<<EOF
-    `echo "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
+    `echo -e "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
     `echo -e "       ${BLUE}_               _${RESET}    ${RED}_       _   _                ${YELLOW}_          _ _${RESET} "` 
     `echo -e "  ${BLUE}__  | |__   ___  ___| |_${RESET} ${RED}(_)_ __ | |_| |__   ___   ${YELLOW}___| |__   ___| | |${RESET}"`
     `echo -e " ${BLUE}/ _\_| '_ \ / _ \/ __| __${RESET} ${RED}| | '_ \| __| '_ \ / _ \ ${YELLOW}/ __| '_ \ / _ \ | |${RESET}"`
@@ -45,7 +45,7 @@ do
     `echo "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
     ${GREEN}=========================================================================${RESET}
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
-    `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
+    `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     ${GREEN}=========================================================================${RESET}
     ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}     |||   ${GREEN}[009] Conn_ChecK${RESET}   
     ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}   |||   ${GREEN}[00l] Ipv4_ChecK${RESET}   
