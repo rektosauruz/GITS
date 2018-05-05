@@ -24,6 +24,10 @@ BLS=${BLUE}"[*]"${RESET}
 GLS=${GREEN}"[*]"${RESET}
 RES=${RED}"[!]"${RESET}
 
+EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
+USAGE_PARAMS="<db_path/db_name>[leave blank for default]  <y/n to Mark>  <y/n to query>  <y/n to read from terminal>  <y/n to create DB sorter file>"
+
+
 
 
 
@@ -39,15 +43,14 @@ do
     `echo -e " ${BLUE}\__, |_| |_|\___/|___/\__${RESET} ${RED}|_|_| |_|\__|_| |_|\___|${YELLOW} |___/_| |_|\___|_|_|${RESET}"`
     `echo -e " ${BLUE}|___/${RESET}                                       													 "`
     `echo "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
- 
     ${GREEN}=========================================================================${RESET}
-    `echo -e "                           ${YELLOW}<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>${RESET}"`
-    `echo -e "                           ${YELLOW}<<<<<${RESET}${RED} MAIN MENU${RESET} ${YELLOW}>>>>>${RESET}"`
+    `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
+    `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     ${GREEN}=========================================================================${RESET}
-    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}     |||   ${GREEN}[009]      N/A${RESET}   
-    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}   |||   ${GREEN}[010]      N/A${RESET}   
-    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007] CryptoPaRseR${RESET}|||   ${GREEN}[011]      N/A${RESET}   
-    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008] Scan_ipv4${RESET}   |||   ${GREEN}[012]      N/A${RESET}   
+    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}     |||   ${GREEN}[009] Conn_ChecK${RESET}   
+    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}   |||   ${GREEN}[00l] Ipv4_ChecK${RESET}   
+    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007] CryptoPaRseR${RESET}|||   ${GREEN}[011]     N/A${RESET}   
+    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008] Scan_ipv4${RESET}   |||   ${GREEN}[012]     N/A${RESET}   
     ${RED}  (q)uit${RESET}
     ${GREEN}=========================================================================${RESET}
 EOF
@@ -331,9 +334,7 @@ done
     echo "####################################################################" >> $dark_zone
         
 
-
 cat $dark_zone >> $database_name
-
 
 
 #getting third parameter
@@ -350,15 +351,32 @@ fi
 }
 
 
+test_connection() {
 
-EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
-USAGE_PARAMS="<db_path/db_name>[leave blank for default]  <y/n to Mark>  <y/n to query>  <y/n to read from terminal>  <y/n to create DB sorter file>"
+testv=`ping -c 1 -w 1 8.8.8.8 | grep ttl`
+    if [ -z "$testv" ];
+        then
+        echo "Internet Connection is ${RED}DOWN${RESET}"
+        sleep 1
+        return 1
+    else
+        echo "Internet Connection is ${GREEN}UP${RESET}"
+        sleep 1
+        return 1
+    fi
 
+}
+
+
+Ipv4_chk() {
+echo "your IP is ${GREEN}`ifconfig wlan0 | grep "inet " | cut -d't' -f2 | cut -d'n' -f1`${RESET}"
+sleep 1
+return 1
+}
 
 parser_input() {
 
 echo "$EXPLANATION"
-
 #a1=/root/Desktop/dbstest.txt
 a1="D"    
 b2="n"
@@ -367,6 +385,7 @@ d4="y"
 e5="n"
 parser "$a1" "$b2" "$c3" "$d4" "$e5"
 sleep 5
+
 }
 
 
@@ -384,7 +403,9 @@ sleep 5
     "5")  sha256 ;;
     "6")  tar_archiever ;;
     "7")  parser_input  ;; 
-    "8")  scan_last_two  ;;         
+    "8")  scan_last_two  ;;  
+    "9")  test_connection ;; 
+    "l") Ipv4_chk ;;    
     "q")  exit                      ;;
 #    "q")  echo "case sensitive!!"   ;; 
      * )  echo "invalid option"     ;;
