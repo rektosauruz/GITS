@@ -329,7 +329,7 @@ for ccr in $(cat /root/GITS/api.list); do
     fi
 
     if [ "$4" == "y" ]; then 
-        echo -e "${RED}Checking ${BLUE}$ccr \t = \t ${GREEN}$varx"
+        echo -e "           ${RED}Checking ${BLUE}$ccr \t = \t ${GREEN}$varx"
         echo -e "## $varn\t\t\t=$varx Delta_24h% = $vard  Delta_1h% = $varh " >> $dark_zone
     elif [ "$4" == "n" ]; then 
         echo -e "## $varn\t\t\t=$varx Delta_24h% = $vard  Delta_1h% = $varh " >> $dark_zone 
@@ -390,7 +390,7 @@ return 1
 
 parser_input() {
 
-echo "$EXPLANATION"
+#echo "$EXPLANATION"
 #a1=/root/Desktop/dbstest.txt
 a1="D"    
 b2="n"
