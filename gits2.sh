@@ -22,7 +22,7 @@ GLS=${GREEN}"[*]"${RESET}
 RES=${RED}"[!]"${RESET}
 
 EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
-USAGE_PARAMS="<db_path/db_name>[leave blank for default]  <y/n to Mark>  <y/n to query>  <y/n to read from terminal>  <y/n to create DB sorter file>"
+USAGE_PARAMS="<1.db_path/db_name[leave blank for default]>  <2.y/n to Mark>  <3.y/n to query>  <4.y/n to read from terminal>  <5.y/n to create DB sorter file>" 
 cts=$(date +"%a_%B_%d_%r_%Z_%Y")
 
 ##################!  MENU  !##################
@@ -194,7 +194,7 @@ esac
 function scan_last_two() {
 
 for ipv4_4 in $(seq 1 255); do
-	ping -c 1 192.168.1.$ipv4_4 | grep "ttl=" | cut -d" " -f4 &
+	ping -c 1 192.168.1.$ipv4_4 | grep "ttl=" | cut -d" " -f4 & 
 done
 sleep 4 
 
@@ -224,7 +224,7 @@ parser() {
 
 #If there is no parameter that is supplied print Explanation and Input Syntax.
 EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
-USAGE_PARAMS="<db_path/db_name>[leave blank for default]  <y/n to Mark>  <y/n to query>  <y/n to read from terminal>  <y/n to create DB sorter file>" 
+USAGE_PARAMS="<1.db_path/db_name[leave blank for default]>  <2.y/n to Mark>  <3.y/n to query>  <4.y/n to read from terminal>  <5.y/n to create DB sorter file>" 
 DEFAULT_DB=/root/GITS/ccr_db.dat
 DEFAULT_qDB=/root/GITS/query_db.dat
 DEFAULT_DBs=/root/GITS/dbs.txt
