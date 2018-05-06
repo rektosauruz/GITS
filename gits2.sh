@@ -42,12 +42,12 @@ do
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     ${GREEN}=========================================================================${RESET}
-    ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}     |||   ${GREEN}[009] Conn_ChecK${RESET}   
-    ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}   |||   ${GREEN}[00l] Ipv4_ChecK${RESET}   
-    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007] CryptoPaRseR${RESET}|||   ${GREEN}[00a] Rec_A${RESET}   
-    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008] Scan_ipv4${RESET}   |||   ${GREEN}[00v] Rec_V(N/A)${RESET}   
-    ${RED}  (q)uit${RESET}
-    ${GREEN}=========================================================================${RESET}
+    |${GREEN} [001] Line_Calculator${RESET}  ||| ${GREEN}[005] SHA-256${RESET}       ||| ${GREEN}[009] Conn_ChecK${RESET}   |   
+    |${GREEN} [002] IPtables_BLK${RESET}     ||| ${GREEN}[006] TaR/UnTaR${RESET}     ||| ${GREEN}[00l] Ipv4_ChecK${RESET}   |  
+    |${GREEN} [003] NetCaT${RESET}           ||| ${GREEN}[007] CryptoPaRseR${RESET}  ||| ${GREEN}[00a] Rec_A${RESET}        |
+    |${GREEN} [004] MD5     ${RESET}         ||| ${GREEN}[008] Scan_ipv4${RESET}     ||| ${GREEN}[00v] Rec_V(N/A)${RESET}   |  
+  ${RED}(q)uit${RESET}${GREEN}=====================================================================${RESET}
+    
 EOF
 ##################!  MENU  !##################
 
