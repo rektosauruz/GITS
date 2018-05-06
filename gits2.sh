@@ -26,7 +26,7 @@ RES=${RED}"[!]"${RESET}
 
 EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
 USAGE_PARAMS="<db_path/db_name>[leave blank for default]  <y/n to Mark>  <y/n to query>  <y/n to read from terminal>  <y/n to create DB sorter file>"
-
+cts=$(date +"%a_%B_%d_%r_%Z_%Y")
 
 
 
@@ -49,8 +49,8 @@ do
     ${GREEN}=========================================================================${RESET}
     ${GREEN}  [001] Line_Calculator${RESET}  |||   ${GREEN}[005] SHA-256${RESET}     |||   ${GREEN}[009] Conn_ChecK${RESET}   
     ${GREEN}  [002] IPtables_BLK${RESET}     |||   ${GREEN}[006] TaR/UnTaR${RESET}   |||   ${GREEN}[00l] Ipv4_ChecK${RESET}   
-    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007] CryptoPaRseR${RESET}|||   ${GREEN}[011]     N/A${RESET}   
-    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008] Scan_ipv4${RESET}   |||   ${GREEN}[012]     N/A${RESET}   
+    ${GREEN}  [003] NetCaT${RESET}           |||   ${GREEN}[007] CryptoPaRseR${RESET}|||   ${GREEN}[00a] Rec_A${RESET}   
+    ${GREEN}  [004] MD5     ${RESET}         |||   ${GREEN}[008] Scan_ipv4${RESET}   |||   ${GREEN}[00v] Rec_V(N/A)${RESET}   
     ${RED}  (q)uit${RESET}
     ${GREEN}=========================================================================${RESET}
 EOF
@@ -374,6 +374,13 @@ sleep 1
 return 1
 }
 
+
+Rec_Audio() {
+parecord /root/REC/"$cts".wav
+return 1
+}
+
+
 parser_input() {
 
 echo "$EXPLANATION"
@@ -405,7 +412,9 @@ sleep 5
     "7")  parser_input  ;; 
     "8")  scan_last_two  ;;  
     "9")  test_connection ;; 
-    "l") Ipv4_chk ;;    
+    "l") Ipv4_chk ;;
+    "a") Rec_Audio ;;
+#   "v") Rec_V ;; to be included laterzz 
     "q")  exit                      ;;
 #    "q")  echo "case sensitive!!"   ;; 
      * )  echo "invalid option"     ;;
