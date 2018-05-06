@@ -51,6 +51,8 @@ do
 EOF
 ##################!  MENU  !##################
 
+
+
 md5() {
 
 echo "please give the string to be converted to md5 format"
@@ -64,6 +66,7 @@ echo "md5 of $u_input : `echo -n "$u_input" | md5sum`" > /root/Desktop/md5.txt
 }
 
 
+
 sha256() {
 
 echo "please give the string to be converted to md5 format"
@@ -75,6 +78,7 @@ touch /root/Desktop/sha256.txt
 echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`" > /root/Desktop/sha256.txt
 
 }
+
 
 
 nc_manager() {
@@ -103,6 +107,7 @@ case "$user_c" in
 esac
 
 }
+
 
 
 line_calc() {
@@ -145,6 +150,7 @@ rm $temp
 }
 
 
+
 iptables_blk() {
 
 #first line is to get the address to be blocked.
@@ -161,6 +167,7 @@ iptables -I FORWARD -s $blk_addr -j DROP
 iptables-save > /etc/iptables.conf
 
 }
+
 
 
 tar_archiever() {
@@ -189,6 +196,7 @@ case "$user_c" in
 esac
 
 }
+
 
 
 function scan_last_two() {
@@ -346,6 +354,7 @@ fi
 }
 
 
+
 test_connection() {
 
 testv=`ping -c 1 -w 1 8.8.8.8 | grep ttl`
@@ -363,6 +372,7 @@ testv=`ping -c 1 -w 1 8.8.8.8 | grep ttl`
 }
 
 
+
 Ipv4_chk() {
 echo "your IP is ${GREEN}`ifconfig wlan0 | grep "inet " | cut -d't' -f2 | cut -d'n' -f1`${RESET}"
 sleep 1
@@ -370,10 +380,12 @@ return 1
 }
 
 
+
 Rec_Audio() {
 parecord /root/REC/"$cts".wav
 return 1
 }
+
 
 
 parser_input() {
@@ -389,6 +401,7 @@ parser "$a1" "$b2" "$c3" "$d4" "$e5"
 sleep 5
 
 }
+
 
 
     read -n1 -s
