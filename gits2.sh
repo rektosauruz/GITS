@@ -1,14 +1,11 @@
 #!/bin/bash
 #author : rektosauruz
 #version : v2.2
-#
-#
-#
-#
+#definition : G.I.T.S. - Ghost In The Shell - A shell framework
+
 
 ### | Declerations          | ====================================================#
-
-# Color Decleratins.
+# Color Declerations
 ESC="["
 RESET=$ESC"39m"
 RED=$ESC"31m"
@@ -28,9 +25,7 @@ EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names
 USAGE_PARAMS="<db_path/db_name>[leave blank for default]  <y/n to Mark>  <y/n to query>  <y/n to read from terminal>  <y/n to create DB sorter file>"
 cts=$(date +"%a_%B_%d_%r_%Z_%Y")
 
-
-
-
+##################!  MENU  !##################
 while :
 do
     clear
@@ -54,8 +49,10 @@ do
     ${RED}  (q)uit${RESET}
     ${GREEN}=========================================================================${RESET}
 EOF
+##################!  MENU  !##################
 
 md5() {
+
 echo "please give the string to be converted to md5 format"
 echo -e "printed to /root/Desktop/md5.txt"
 read u_input
@@ -63,10 +60,12 @@ echo "md5 of $u_input : `echo -n "$u_input" | md5sum`"
 sleep 1
 touch /root/Desktop/md5.txt
 echo "md5 of $u_input : `echo -n "$u_input" | md5sum`" > /root/Desktop/md5.txt
+
 }
 
 
 sha256() {
+
 echo "please give the string to be converted to md5 format"
 echo -e "printed to /root/Desktop/sha256.txt"
 read u_input
@@ -74,6 +73,7 @@ echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`"
 sleep 1
 touch /root/Desktop/sha256.txt
 echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`" > /root/Desktop/sha256.txt
+
 }
 
 
@@ -136,7 +136,7 @@ total=0
 for ccb in $(cat $temp); do
     fl_count=$(wc -l $ccb 2> /dev/null | cut -d ' ' -f1)
     sum=$fl_count
-    total=$(( sum + total ))
+    total=$(( sum + total + 1 ))
 done
 
 echo "total number of lines in $path = $total"
@@ -197,6 +197,7 @@ for ipv4_4 in $(seq 1 255); do
 	ping -c 1 192.168.1.$ipv4_4 | grep "ttl=" | cut -d" " -f4 &
 done
 sleep 4 
+
 }
 
 
@@ -234,8 +235,6 @@ if [ ! -f /root/GITS/api.list ]; then
     printf "monero\nbitcoin\nethereum\nkarbowanec\nsumokoin" >> /root/GITS/api.list
 fi
 
-
-
 #if first parameters is given as a file name use that file to populate else use the default database file
 if [ -z "$1" ]; then
     database_name=$DEFAULT_DB
@@ -246,8 +245,6 @@ elif [ "$1" = "D" ]; then
 else
     database_name=$1
 fi
-
-
 
 #if first parameters is given as a file name use that file to populate else use the default database file
 ##condition if the file exist and user input required
@@ -333,9 +330,7 @@ done
 
     echo "####################################################################" >> $dark_zone
         
-
 cat $dark_zone >> $database_name
-
 
 #getting third parameter
 if [ "$3" == "q" ]; then
@@ -421,9 +416,3 @@ sleep 5
     esac
     sleep 1
 done
-
-
-
-
-
-
