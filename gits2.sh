@@ -30,14 +30,14 @@ while :
 do
     clear
     cat<<EOF
-    `echo -e "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
+    `echo -e "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}======================${RESET}"`
     `echo -e "       ${BLUE}_               _${RESET}    ${RED}_       _   _                ${YELLOW}_          _ _${RESET} "` 
     `echo -e "  ${BLUE}__  | |__   ___  ___| |_${RESET} ${RED}(_)_ __ | |_| |__   ___   ${YELLOW}___| |__   ___| | |${RESET}"`
     `echo -e " ${BLUE}/ _\_| '_ \ / _ \/ __| __${RESET} ${RED}| | '_ \| __| '_ \ / _ \ ${YELLOW}/ __| '_ \ / _ \ | |${RESET}"`
     `echo -e "${BLUE}| (_| | | | | (_) \__ \ |_${RESET} ${RED}| | | | | |_| | | |  __/ ${YELLOW}\__ \ | | |  __/ | |${RESET}"`
     `echo -e " ${BLUE}\__, |_| |_|\___/|___/\__${RESET} ${RED}|_|_| |_|\__|_| |_|\___|${YELLOW} |___/_| |_|\___|_|_|${RESET}"`
     `echo -e " ${BLUE}|___/${RESET}                                       													 "`
-    `echo "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}=======================${RESET}"`
+    `echo "${BLUE}==========================${RESET}${RED}=========================${RESET}${YELLOW}======================${RESET}"`
     ${GREEN}=========================================================================${RESET}
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
@@ -233,9 +233,15 @@ parser() {
 #If there is no parameter that is supplied print Explanation and Input Syntax.
 EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
 USAGE_PARAMS="<1.db_path/db_name[leave blank for default]>  <2.y/n to Mark>  <3.y/n to query>  <4.y/n to read from terminal>  <5.y/n to create DB sorter file>" 
-DEFAULT_DB=/root/GITS/ccr_db.dat
-DEFAULT_qDB=/root/GITS/query_db.dat
+#DEFAULT_DB=/root/GITS/ccr_db.dat
+#DEFAULT_qDB=/root/GITS/query_db.dat
+#DEFAULT_DBs=/root/GITS/dbs.txt
+DEFAULT_DB=/root/cron_files/ccr_db.dat
+DEFAULT_qDB=/root/cron_files/query_db.dat
 DEFAULT_DBs=/root/GITS/dbs.txt
+
+
+
 
 #api.list checker if not present create automatically
 if [ ! -f /root/GITS/api.list ]; then
@@ -386,6 +392,11 @@ parecord /root/REC/"$cts".wav
 return 1
 }
 
+#Rec_Video() {
+#vlc -I dummy v4l2:///dev/video0 --video-filter scene --no-audio --scene-path /root/Desktop/cam_rec --scene-prefix image_prefix --scene-format png vlc://quit --run-time=1
+#return 1
+#}
+
 
 
 parser_input() {
@@ -422,7 +433,7 @@ sleep 5
     "9")  test_connection ;; 
     "l") Ipv4_chk ;;
     "a") Rec_Audio ;;
-#   "v") Rec_V ;; to be included laterzz 
+#   "v") Rec_Video ;; to be included laterzz 
     "q")  exit                      ;;
 #    "q")  echo "case sensitive!!"   ;; 
      * )  echo "invalid option"     ;;
