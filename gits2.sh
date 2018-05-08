@@ -45,7 +45,7 @@ do
     |${GREEN} [001] Line_Calculator${RESET}  ||| ${GREEN}[005] SHA-256${RESET}       ||| ${GREEN}[009] Conn_ChecK${RESET}   |   
     |${GREEN} [002] IPtables_BLK${RESET}     ||| ${GREEN}[006] TaR/UnTaR${RESET}     ||| ${GREEN}[00l] Ipv4_ChecK${RESET}   |  
     |${GREEN} [003] NetCaT${RESET}           ||| ${GREEN}[007] CryptoPaRseR${RESET}  ||| ${GREEN}[00a] Rec_A${RESET}        |
-    |${GREEN} [004] MD5     ${RESET}         ||| ${GREEN}[008] Scan_ipv4${RESET}     ||| ${GREEN}[00v] Rec_V(N/A)${RESET}   |  
+    |${GREEN} [004] MD5     ${RESET}         ||| ${GREEN}[008] Scan_ipv4${RESET}     ||| ${GREEN}[00v] Rec_V${RESET}        |  
   ${RED}(q)uit${RESET}${GREEN}=====================================================================${RESET}
     
 EOF
@@ -388,14 +388,14 @@ return 1
 
 
 Rec_Audio() {
-parecord /root/REC/"$cts".wav
+parecord /root/A_REC/"$cts".wav
 return 1
 }
 
-#Rec_Video() {
-#vlc -I dummy v4l2:///dev/video0 --video-filter scene --no-audio --scene-path /root/Desktop/cam_rec --scene-prefix image_prefix --scene-format png vlc://quit --run-time=1
-#return 1
-#}
+Rec_Video() {
+vlc -I dummy v4l2:///dev/video0 -Vdummy --video-filter scene --no-audio --scene-path /root/C_REC --scene-prefix "$cts" --scene-format png vlc://quit --run-time=1
+return 1
+}
 
 
 
@@ -433,7 +433,7 @@ sleep 5
     "9")  test_connection ;; 
     "l") Ipv4_chk ;;
     "a") Rec_Audio ;;
-#   "v") Rec_Video ;; to be included laterzz 
+    "v") Rec_Video ;;  
     "q")  exit                      ;;
 #    "q")  echo "case sensitive!!"   ;; 
      * )  echo "invalid option"     ;;
