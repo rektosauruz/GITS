@@ -24,6 +24,8 @@ RES=${RED}"[!]"${RESET}
 EXPLANATION="Cryptocurrency API Logger With Timestamp [Please Add Currency names to api.list file]"
 USAGE_PARAMS="<1.db_path/db_name[leave blank for default]>  <2.y/n to Mark>  <3.y/n to query>  <4.y/n to read from terminal>  <5.y/n to create DB sorter file>" 
 cts=$(date +"%a_%B_%d_%r_%Z_%Y")
+default_out=/root/Desktop/
+vpnpath=/etc/openvpn/
 
 ##################!  MENU  !##################
 while :
@@ -42,10 +44,12 @@ do
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RESET}${RED}  ${BLUE}G.${RESET}${RED}I.T.${RESET}${YELLOW}S.${RESET}${YELLOW} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     `echo -e "${YELLOW}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${RED} MAIN MENU${RESET} ${YELLOW}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${RESET}"`
     ${GREEN}=========================================================================${RESET}
-    |${GREEN} [001] Line_Calculator${RESET}  ||| ${GREEN}[005] SHA-256${RESET}       ||| ${GREEN}[009] Conn_ChecK${RESET}   |   
-    |${GREEN} [002] IPtables_BLK${RESET}     ||| ${GREEN}[006] TaR/UnTaR${RESET}     ||| ${GREEN}[00l] Ipv4_ChecK${RESET}   |  
-    |${GREEN} [003] NetCaT${RESET}           ||| ${GREEN}[007] CryptoPaRseR${RESET}  ||| ${GREEN}[00a] Rec_A${RESET}        |
-    |${GREEN} [004] MD5     ${RESET}         ||| ${GREEN}[008] Scan_ipv4${RESET}     ||| ${GREEN}[00v] Rec_V${RESET}        |  
+    |${GREEN} [001] Line_Calculator${RESET}  ||| ${GREEN}[007] CryptoPaRseR${RESET}  ||| ${GREEN}[00n] NSlookup${RESET}  |   
+    |${GREEN} [002] IPtables_BLK${RESET}     ||| ${GREEN}[008] Scan_ipv4${RESET}     ||| ${GREEN}[00v] Rec_V${RESET}     |  
+    |${GREEN} [003] NetCaT${RESET}           ||| ${GREEN}[009] Conn_ChecK${RESET}    ||| ${GREEN}[00a] Rec_A${RESET}     |
+    |${GREEN} [004] MD5${RESET}              ||| ${GREEN}[00l] Ipv4_ChecK${RESET}    ||| ${GREEN}[00c] Rec_C${RESET}     |
+    |${GREEN} [005] SHA-256 ${RESET}         ||| ${GREEN}[00w] Whois     ${RESET}    ||| ${GREEN}[00s] SSH(N/A)${RESET}  |
+    |${GREEN} [006] TaR/UnTaR${RESET}        ||| ${GREEN}[00d] DNS_L_Test${RESET}    ||| ${GREEN}[00p] Vpn${RESET}       |  
   ${RED}(q)uit${RESET}${GREEN}=====================================================================${RESET}
     
 EOF
@@ -53,15 +57,21 @@ EOF
 
 
 
+
+
+
 md5() {
 
-echo "please give the string to be converted to md5 format"
-echo -e "printed to /root/Desktop/md5.txt"
+echo "please give the string to be converted to md5 format / Q to quit"
 read u_input
-echo "md5 of $u_input : `echo -n "$u_input" | md5sum`"
-sleep 1
-touch /root/Desktop/md5.txt
-echo "md5 of $u_input : `echo -n "$u_input" | md5sum`" > /root/Desktop/md5.txt
+	if [ "$u_input" == "Q" ]; 
+		then
+		return 1
+	else 
+		echo "md5 of $u_input : `echo -n "$u_input" | md5sum`"
+		sleep 1
+		echo "md5 of $u_input : `echo -n "$u_input" | md5sum`" >> "$default_out"md5.txt
+    fi
 
 }
 
@@ -69,14 +79,16 @@ echo "md5 of $u_input : `echo -n "$u_input" | md5sum`" > /root/Desktop/md5.txt
 
 sha256() {
 
-echo "please give the string to be converted to md5 format"
-echo -e "printed to /root/Desktop/sha256.txt"
+echo "please give the string to be converted to md5 format / Q to quit"
 read u_input
-echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`"
-sleep 1
-touch /root/Desktop/sha256.txt
-echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`" > /root/Desktop/sha256.txt
-
+	if [ "$u_input" == "Q" ];
+		then
+		return 1
+	else
+		echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`"
+		sleep 1
+		echo "sha256 of $u_input : `echo -n "$u_input" | sha256sum`" >> "$default_out"sha256.txt
+	fi
 }
 
 
@@ -146,7 +158,7 @@ done
 
 echo "total number of lines in $path = $total"
 rm $temp
-
+sleep 2
 }
 
 
@@ -179,15 +191,15 @@ read user_c
 
 case "$user_c" in
    "1") echo "name the packed file"
-	      echo "path/filename"
         read file_p1
+        echo "path/file_name"
         read file_p2
-        tar -czvf /root/Desktop/"$file_p1".tar.gz --directory $file_p2 .
+        tar -czvf /root/Desktop/"$file_p1".tar.gz --directory "$file_p2" .
     
    ;;
    "2") echo "path/filename"
-        read dir1
-        tar -xzvf "$dir"
+        read file_p3
+        tar -xzvf "$file_p3" -C /root/Desktop
    ;;
    "Q") return 1 #exit 0
    ;;
@@ -392,8 +404,18 @@ parecord /root/A_REC/"$cts".wav
 return 1
 }
 
+
+
+Rec_Cam() {
+vlc -I dummy v4l2:///dev/video0 -Vdummy --video-filter scene --no-audio --scene-path /root/C_REC --scene-prefix "$cts" --scene-format png vlc://quit --run-time=1 
+return 1
+}
+
+
+
 Rec_Video() {
-vlc -I dummy v4l2:///dev/video0 -Vdummy --video-filter scene --no-audio --scene-path /root/C_REC --scene-prefix "$cts" --scene-format png vlc://quit --run-time=1
+parecord /root/V_REC/"$cts".wav &
+vlc -I dummy v4l2:///dev/video0 -Vdummy --video-filter scene --no-audio --scene-path /root/V_REC --scene-prefix "$cts" --scene-format png vlc://quit --run-time=1 &
 return 1
 }
 
@@ -415,6 +437,110 @@ sleep 5
 
 
 
+#nslookup function will be added laterz
+lookup () {
+
+echo -e "input the address / Q to exit"
+read que
+	if [ "$que" == "Q" ];
+		then
+		return 1
+	else
+		nslookup "$que" >> "$default_out"nslookup.txt
+	fi
+
+}
+
+
+
+who_is() {
+
+echo -e "IP addr lookup / Q to exit"
+read iaddr
+	if [ "$iaddr" == "Q" ]; 
+		then 
+		return 1
+	else
+	    whois "$iaddr" >> "$default_out"whois.txt
+	fi 
+
+}
+
+
+
+ssh_connect () {
+
+echo -e " [hostname] / Q to exit"
+read uissh
+	if [ "$uissh" == "Q" ]; 
+		then 
+		return 1
+	else
+	    echo -e "connecting to $uissh"  
+	    ssh "$uissh"
+	fi 
+
+}
+
+
+
+start_vpn () {
+
+echo -e "${RED} make sure dnsresolv is installed${RESET}"
+echo -e "select connection type ?"
+echo -e "${GREEN}tcp${RESET} / ${RED}udp${RESET}"
+read v1
+echo -e "`ls $vpnpath | cut --bytes=1,2 | uniq`"
+echo -e " ${BLUE}country ?${RESET}"
+read v2
+echo -e "`ls $vpnpath | awk -v a1="$v1" -v b2="$v2" ' $0 ~ a1 && $1 ~ b2 {print $0, $1}' | cut --bytes=3,4,5 `"
+echo -e "${YELLOW}pick a client number${RESET}"
+read v3
+if [ "$v1" == "tcp" ];then
+	sed -i '27i\script-security 2' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"443.ovpn"
+	sed -i '28i\up /etc/openvpn/update-resolv-conf' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"443.ovpn"
+	sed -i '29i\down /etc/openvpn/update-resolv-conf' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"443.ovpn"
+	openvpn ""$vpnpath""$v2""$v3".nordvpn.com."$v1"443.ovpn"
+	sed -i '/update-resolv-conf/d' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"443.ovpn" 
+	sed -i '/script-security/d' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"443.ovpn"
+	return 1
+elif ["$v1" == "udp" ];then
+	sed -i '27i\script-security 2' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"1194.ovpn"
+	sed -i '28i\up /etc/openvpn/update-resolv-conf' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"1194.ovpn"
+	sed -i '29i\down /etc/openvpn/update-resolv-conf' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"1194.ovpn"
+	openvpn ""$vpnpath""$v2""$v3".nordvpn.com."$v1"1194.ovpn"
+    sed -i '/update-resolv-conf/d' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"1194.ovpn" 
+    sed -i '/script-security/d' ""$vpnpath""$v2""$v3".nordvpn.com."$v1"1194.ovpn"
+	return 1
+else
+    echo "use defined values!"
+    return 1
+fi
+
+}
+
+
+
+leaktest () {
+
+o_ip="`nslookup whoami.akamai.net | grep "Address: 1" | cut -d':' -f2 | xargs`"
+net_nom="`whois "$o_ip" | grep "netname: " | cut -d':' -f2 | xargs`"
+echo "ADDRESS = $o_ip"
+echo "NETNAME = $net_nom"
+if [ "$net_nom" == "TR-TELEKOM-960902" ];
+  then
+  echo -e "${RED}!!!DNS LEAK!!!${RESET}"
+  sleep 3
+else
+  echo -e "${GREEN}///CLEAR///${RESET}"
+  sleep 3
+fi
+return 1
+}
+
+
+
+
     read -n1 -s
     case "$REPLY" in
 #    "1")  sh /root/Desktop/GITS/linecalculator_v05.sh ;;
@@ -431,12 +557,90 @@ sleep 5
     "7")  parser_input  ;; 
     "8")  scan_last_two  ;;  
     "9")  test_connection ;; 
-    "l") Ipv4_chk ;;
-    "a") Rec_Audio ;;
-    "v") Rec_Video ;;  
+    "l")  Ipv4_chk ;;
+    "a")  Rec_Audio ;;
+    "c")  Rec_Cam ;;  
+    "v")  Rec_Video ;;
+    "w")  who_is ;;
+    "s")  ssh_connect ;;
+    "p")  start_vpn ;;
+    "d")  leaktest ;;
+    "n")  lookup ;;
     "q")  exit                      ;;
 #    "q")  echo "case sensitive!!"   ;; 
      * )  echo "invalid option"     ;;
     esac
     sleep 1
 done
+
+
+
+######SCRATCHPAD#######
+##Rec_Video() {
+#cvlc -I dummy v4l2:///dev/video0 --sout "#transcode{vcodec=h264,acodec=mp4a,ab=128,channels=2,samplerate=44100}:std{access=file,mux=mp4,dst=/root/V_REC/test.mp4}"  vlc://quit
+#cvlc -I dummy v4l2:// :input-slave=pacat// :v4l-vdev="/dev/video0" :v4l-norm=3 :v4l-frequency=-1 :v4l-caching=300 :v4l-chroma="" :v4l-fps=-1.000000 :v4l-samplerate=44100 :v4l-channel=0 :v4l-tuner=-1 :v4l-audio=-1 :v4l-stereo :v4l-width=480 :v4l-height=360 :v4l-brightness=-1 :v4l-colour=-1 :v4l-hue=-1 :v4l-contrast=-1 :no-v4l-mjpeg :v4l-decimation=1 :v4l-quality=100 --sout="#transcode{vcodec=theo,vb=2000,fps=12,scale=0.67,acodec=vorb,ab=90,channels=1,samplerate=44100}:standard{access=file,mux=ogg,dst=test.mp4}"
+#cvlc v4l2:// :v4l-vdev="/dev/video0" :v4l-adev="/dev/pcm" :v4l-norm=3 :v4l-frequency=-1 :v4l-caching=300 :v4l-chroma="" :v4l-fps=-1.000000 :v4l-samplerate=44100 :v4l-channel=0 :v4l-tuner=-1 :v4l-audio=-1 :v4l-stereo :v4l-width=480 :v4l-height=360 :v4l-brightness=-1 :v4l-colour=-1 :v4l-hue=-1 :v4l-contrast=-1 :no-v4l-mjpeg :v4l-decimation=1 :v4l-quality=100 --sout="#transcode{vcodec=theo,vb=2000,fps=12,scale=0.67,acodec=vorb,ab=90,channels=1,samplerate=44100}:standard{access=file,mux=ogg,dst=test1.mp4}"
+#}
+###define regular expression##
+#re='^[0-9]+$'
+##      echo -e "/etc/openvpn/"$uu_input""$u1_choice".nordvpn.com."$uu0_input"443.ovpn" >> /root/Desktop/failedstring.txt
+##      echo -e "/etc/openvpn/"$uu_input""$u1_choice".nordvpn.com."$uu0_input"1194.ovpn" >> /root/Desktop/failedstring.txt
+######################
+#echo "$(<vpn2list.txt)" | cut --bytes=1,2 | uniq
+
+
+
+#echo -e "`ls $vpnpath | awk '/"$v2"/ && /"$v1"/' | cut --bytes=3,4,5 `"
+
+
+#start_vpn () {
+
+##check for the vpn list, will be located at /root/GITS/
+#	if [ ! -f /root/GITS/vpn.list ]; then
+#    	touch /root/GITS/vpn.list
+#    	ls $vpnpath | cut --bytes=1,2 | uniq >> /root/GITS/vpn.list 
+#	fi
+#echo "$(</root/GITS/vpn.list)"
+#echo "select country"
+#read uu_input
+#echo -e "TCP / UDP"
+#read uu0_input
+#	if [ "$uu0_input" == "tcp" ];
+#		then
+#		case "$uu_input" in
+#		"uk") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"us") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"ca") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+ #   	"jp") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"de") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"tr") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#	    * ) echo "invalid option" & return 1 ;;
+ #       esac
+  #      echo -e "select the config file by the number"
+#        read u1_choice
+#        ##parse the required command to activate/deactive resolvconf
+
+ 
+#        openvpn "/etc/openvpn/"$uu_input""$u1_choice".nordvpn.com."$uu0_input"443.ovpn"
+#	elif [ "$uu_input" == "udp" ];
+#		then
+#		case "$uu_input" in
+#		"uk") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"us") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"ca") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+ #   	"jp") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"de") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#		"tr") ls /etc/openvpn/ | grep $uu_input | grep $uu0_input ;;
+#	    * ) echo "invalid option" & return 1 ;;
+#        esac
+#        echo -e "select the config file by the number"
+#        read u1_choice
+#        ##parse the required command to activate/deactive resolvconf
+
+  
+#        openvpn "/etc/openvpn/"$uu_input""$u1_choice".nordvpn.com."$uu0_input"1194.ovpn"
+#    else 
+#    	return 1
+#    fi 
+#
+#}
