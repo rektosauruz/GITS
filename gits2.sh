@@ -1,8 +1,8 @@
 #!/bin/bash
 #author : rektosauruz
-#version : v2.2
+#version : v3.2 
 #definition : G.I.T.S. - Ghost In The Shell - A shell framework
-
+##ssh manager included
 
 ### | Declerations          | ====================================================#
 # Color Declerations
@@ -48,7 +48,7 @@ do
     |${GREEN} [002] IPtables_BLK${RESET}     ||| ${GREEN}[008] Scan_ipv4${RESET}     ||| ${GREEN}[00v] Rec_V${RESET}     |  
     |${GREEN} [003] NetCaT${RESET}           ||| ${GREEN}[009] Conn_ChecK${RESET}    ||| ${GREEN}[00a] Rec_A${RESET}     |
     |${GREEN} [004] MD5${RESET}              ||| ${GREEN}[00l] Ipv4_ChecK${RESET}    ||| ${GREEN}[00c] Rec_C${RESET}     |
-    |${GREEN} [005] SHA-256 ${RESET}         ||| ${GREEN}[00w] Whois     ${RESET}    ||| ${GREEN}[00s] SSH(N/A)${RESET}  |
+    |${GREEN} [005] SHA-256 ${RESET}         ||| ${GREEN}[00w] Whois     ${RESET}    ||| ${GREEN}[00s] SSH${RESET}       |
     |${GREEN} [006] TaR/UnTaR${RESET}        ||| ${GREEN}[00d] DNS_L_Test${RESET}    ||| ${GREEN}[00p] Vpn${RESET}       |  
   ${RED}(q)uit${RESET}${GREEN}=====================================================================${RESET}
     
@@ -113,6 +113,8 @@ case "$user_c" in
         nc -nvlp $port > $file
    ;;
    "Q") return 1 #exit 0
+   ;;
+   "q") return 1 #exit 0
    ;;
    *) echo "use defined values, ending the program now."
    ;;  
@@ -470,15 +472,27 @@ read iaddr
 
 ssh_connect () {
 
-echo -e " [hostname] / Q to exit"
-read uissh
-	if [ "$uissh" == "Q" ]; 
+echo -e "[hostname/ip/port] / q to exit"
+echo -e "hostname ?"
+read uissh1
+		if [ "$uissh1" == "q" ]; 
 		then 
-		return 1
-	else
-	    echo -e "connecting to $uissh"  
-	    ssh "$uissh"
-	fi 
+		   return 1
+	    fi 
+echo -e "ip ?"
+read uissh2
+		if [ "$uissh2" == "q" ]; 
+		then 
+		   return 1
+		fi 
+echo -e "port ?"
+read uissh3
+		if [ "$uissh3" == "q" ]; 
+		then 
+		   return 1
+		fi
+
+ssh "$uissh1"@"$uissh2" -p "$uissh3"
 
 }
 
