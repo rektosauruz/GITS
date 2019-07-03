@@ -7,9 +7,7 @@
     #usage          :./linecalculator.sh (dir)
     #notes          :locating the sub folders using find, wc -l folder error is handled by 2> /dev/null  
     #bash_version   :4.4.11(1)-release
-    #Donation XMR   :46Jh7aZkVCLKAjFiyNYD6vhrEFtwswVSbVsqMyGsrUUV1bjmQJv4EwFb2xWNqS3x7aWnMNM1UWKyfZd6ZcscqncSQEFpZtXs
-    #Donation BTC   :13MWtnPZPy54q3qhxgbYA14m89fZkn6noK
-    #================================================================================
+   
 
 
 
